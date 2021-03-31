@@ -1,0 +1,7 @@
+ru\geekbrains\Utils.class
+ru\geekbrains\persist\model\User.class
+ru\geekbrains\persist\model\Category.class
+ru\geekbrains\persist\repo\RoleRepository.class
+ru\geekbrains\persist\model\Product.class
+ru\geekbrains\persist\repo\UserRepository.class
+ru\geekbrains\persist\model\Role.class
