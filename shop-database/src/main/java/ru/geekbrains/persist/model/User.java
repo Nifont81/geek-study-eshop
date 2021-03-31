@@ -1,5 +1,7 @@
 package ru.geekbrains.persist.model;
 
+import ru.geekbrains.shopadminui.service.UserRepr;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,10 +19,15 @@ public class User {
     @Column(length = 256, nullable = false)
     private String password;
 
+    private String email;
+
+    private Integer age;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private Set<Role> roles;
 
     public User() {
@@ -31,6 +38,14 @@ public class User {
         this.login = login;
         this.password = password;
     }
+
+    public User(UserRepr user) {
+        this.id = user.getId();
+        this.login = user.getLogin();
+        this.password = user.getPassword();
+        this.roles = user.getRoles();
+    }
+
 
     public Long getId() {
         return id;
@@ -54,5 +69,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 }
