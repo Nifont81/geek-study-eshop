@@ -1,6 +1,6 @@
 package ru.geekbrains.persist.model;
 
-import ru.geekbrains.shopadminui.service.UserRepr;
+import ru.geekbrains.service.UserRepr;
 
 import javax.persistence.*;
 import java.util.Set;

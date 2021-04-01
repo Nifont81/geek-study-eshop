@@ -1,6 +1,6 @@
 package ru.geekbrains.persist.model;
 
-import ru.geekbrains.shopadminui.service.ProductDTO;
+import ru.geekbrains.service.ProductDTO;
 
 import javax.persistence.*;
 

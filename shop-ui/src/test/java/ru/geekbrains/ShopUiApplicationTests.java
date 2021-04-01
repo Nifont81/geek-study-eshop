@@ -1,10 +1,10 @@
-package ru.geekbrains.shopadminui;
+package ru.geekbrains;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 //@SpringBootTest
-class ShopAdminUiApplicationTests {
+class ShopUiApplicationTests {
 
     @Test
     void contextLoads() {
