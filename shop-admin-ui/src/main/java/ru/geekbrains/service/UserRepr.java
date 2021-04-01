@@ -1,4 +1,4 @@
-package ru.geekbrains.shopadminui.service;
+package ru.geekbrains.service;
 
 
 import ru.geekbrains.persist.model.Role;

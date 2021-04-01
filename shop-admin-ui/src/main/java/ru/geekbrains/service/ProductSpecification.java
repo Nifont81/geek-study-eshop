@@ -1,4 +1,4 @@
-package ru.geekbrains.shopadminui.service;
+package ru.geekbrains.service;
 
 import org.springframework.data.jpa.domain.Specification;
 import ru.geekbrains.persist.model.Product;
