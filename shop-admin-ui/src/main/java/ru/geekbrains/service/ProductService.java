@@ -1,25 +1,18 @@
 package ru.geekbrains.service;
 
-import org.springframework.data.domain.Page;
+import ru.geekbrains.controllers.repr.ProductRepr;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
 
-    List<ProductDTO> findAll();
+    List<ProductRepr> findAll();
 
-    Optional<ProductDTO> findById(long id);
+    Optional<ProductRepr> findById(Long id);
 
-//    List<ProductDTO> findProductByNameLike(String nameFilter);
-//
-//    List<ProductDTO> findProductByPriceIn(double minPrice, double maxPrice);
+    void deleteById(Long id);
 
-    Page<ProductDTO> findWithFilter(String nameFilter, Double minPrice, Double maxPrice,
-                                    Integer page, Integer size, String sortBy);
-
-    void save(ProductDTO product);
-
-    void delete(long id);
-
+    void save(ProductRepr product) throws IOException;
 }

@@ -1,20 +1,17 @@
 package ru.geekbrains.service;
 
-import org.springframework.data.domain.Page;
+import ru.geekbrains.controllers.repr.UserRepr;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
+    void save(UserRepr userRepr);
+
     List<UserRepr> findAll();
 
-    Page<UserRepr> findWithFilter(String usernameFilter, Integer minAge, Integer maxAge,
-                                  Integer page, Integer size, String sortField);
+    Optional<UserRepr> findById(Long id);
 
-    Optional<UserRepr> findById(long id);
-
-    void save(UserRepr user);
-
-    void delete(long id);
+    void delete(Long id);
 }

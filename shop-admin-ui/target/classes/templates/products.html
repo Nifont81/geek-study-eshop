@@ -2,128 +2,69 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="fragments/head.html::head"/>
+<head th:replace="fragments/header :: head"></head>
 
-<body>
+<body class="bg-light">
 
-<nav th:replace="fragments/head.html::navbar('Products')"/>
+<div th:replace="fragments/header :: header"></div>
 
-<div class="container">
-    <div class="row py-2">
+<div class="d-flex">
+    <div th:replace="fragments/sidebar :: sidebar"></div>
 
-        <div sec:authorize="hasRole('ADMIN')" class="col-12">
-            <a class="btn btn-primary" th:href="@{/products/new}">Добавить продукт</a>
+    <div class="content p-4">
+        <h2 class="mb-4">Products list</h2>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <form class="form-group" th:action="@{/product/create}">
+                    <button type="submit" class="btn btn-primary">Create new</button>
+                </form>
+
+                <table id="products" class="table table-hover" cellspacing="0" width="100%">
+                    <thead>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th class="actions">Actions</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="prod : ${products}">
+                        <td th:text="${prod.id}"></td>
+                        <td th:text="${prod.name}"></td>
+                        <td th:text="${prod.category.name}"></td>
+                        <td th:text="${prod.brand.name}"></td>
+                        <td th:text="${prod.price}"></td>
+                        <td>
+                            <a th:href="@{/product/{id}/edit(id=${prod.id})}" class="btn btn-icon btn-pill btn-primary"
+                               data-toggle="tooltip" title="Edit">
+                                <i class="fa fa-fw fa-edit"></i>
+                            </a>
+                            <form th:action="@{/product/{id}/delete(id=${prod.id})}" th:method="delete"
+                                  class="d-inline">
+                                <button class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete">
+                                    <i class="fa fa-fw fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
-
-        <!--        Форма для фильтра -->
-        <div class="col-12 mt-3">
-            <form class="form-inline" th:method="get">
-
-                <div class="form-group mb-2 mr-2">
-                    <label for="nameFilter" class="sr-only">Name Filter</label>
-                    <input type="text" class="form-control" id="nameFilter" th:value="${param.nameFilter}"
-                           name="nameFilter" placeholder="Фильтр по названию">
-                </div>
-
-                <div class="form-group mb-2 mr-2">
-                    <label for="minPrice" class="sr-only">Min Price</label>
-                    <input type="number" class="form-control" id="minPrice" th:value="${param.minPrice}"
-                           name="minPrice" placeholder="Минимальная цена">
-                </div>
-
-                <div class="form-group mb-2 mr-2">
-                    <label for="maxPrice" class="sr-only">Max Price</label>
-                    <input type="number" class="form-control" id="maxPrice" th:value="${param.maxPrice}"
-                           name="maxPrice" placeholder="Максимальная цена">
-                    <!--                    th:value="${param.maxPrice} чтоб сохранялись параметры при обновлении страницы-->
-                </div>
-
-                <button type="submit" class="btn btn-primary mb-2">Применить</button>
-            </form>
-        </div>
-
-
-        <div class="col-12">
-            <table class="table table-bordered my-2">
-                <thead>
-                <tr>
-                    <th scope="col" th:replace="fragments/sort_header :: sort_header ('Id', 'id')"/>
-                    <th scope="col" th:replace="fragments/sort_header :: sort_header ('Наименование', 'name')"/>
-                    <th scope="col" th:replace="fragments/sort_header :: sort_header ('Описание', 'description')"/>
-                    <th sec:authorize="hasRole('ADMIN')" scope="col" th:replace="fragments/sort_header :: sort_header ('Цена', 'price')"/>
-                    <th scope="col">Действия</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${products.hasContent()}" th:each="product : ${products.content}">
-                    <th th:text="${product.id}" scope="row">1</th>
-                    <td th:text="${product.name}">Product1</td>
-                    <td th:text="${product.description}">Description1</td>
-                    <td th:text="${product.price}">100</td>
-                    <td sec:authorize="hasRole('ADMIN')">
-                        <a class="btn btn-success" th:href="@{/products/{id} (id = ${product.id})}"><i
-                                class="fas fa-edit"></i></a>
-
-                        <!--                        Фиктивная форма для отправки запроса "delete" (POST)-->
-                        <form class="d-inline" th:method="delete" th:action="@{/products/{id} (id = ${product.id})}">
-                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                        </form>
-
-                    </td>
-                </tr>
-
-                <tr th:unless="${products.hasContent()}">
-                    <td colspan="5">Нет данных</td>
-                </tr>
-
-                </tbody>
-            </table>
-
-            <nav aria-label="...">
-                <ul class="pagination">
-
-                    <li class="page-item"
-                        th:classappend="${products.number<1} ? 'disabled'">
-                        <a class="page-link"
-                           th:href="@{/products(page=${products.number}, nameFilter=${param.nameFilter},
-                                minPrice=${param.minPrice}, maxPrice=${param.maxPrice}, sortBy=${param.sortBy} )}"
-                           tabindex="-1">Назад</a>
-                        <!--                        В ${products.number} значение меньше на 1, поэтому просто присваиваем, для перехода назад-->
-                    </li>
-
-
-                    <li th:each="num: ${#numbers.sequence(1, products.totalPages)}"
-
-                        th:classappend="${num == products.number + 1} ? 'active'"
-                        class="page-item">
-
-                        <!--            Выше 2 стр заменили вот это:  class="page-item active">-->
-
-                        <a th:text="${num}"
-
-                           th:href="@{/products(page=${num}, nameFilter=${param.nameFilter},
-                                minPrice=${param.minPrice}, maxPrice=${param.maxPrice}, sortBy=${param.sortBy}   )}"
-
-                           class="page-link">1 <span th:if="${num == products.number + 1}"
-                                                     class="sr-only">(current)</span></a>
-                    </li>
-
-                    <li class="page-item"
-                        th:classappend="${products.number>=products.getTotalPages()-1} ? 'disabled'">
-                        <a class="page-link"
-                           th:href="@{/products(page=${products.number}+2, nameFilter=${param.nameFilter},
-                                minPrice=${param.minPrice}, maxPrice=${param.maxPrice}, sortBy=${param.sortBy}  )}"
-                        >Вперед</a>
-                    </li>
-
-                </ul>
-            </nav>
-        </div>
-
     </div>
 </div>
 
-<th:block th:replace="fragments/footer.html :: scripts"/>
+<script th:replace="fragments/footer :: scripts"></script>
+<script th:src="@{/js/datatables.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        $('#products').DataTable();
+    });
+</script>
 
 </body>
 </html>

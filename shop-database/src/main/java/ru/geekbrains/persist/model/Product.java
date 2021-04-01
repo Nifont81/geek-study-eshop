@@ -1,46 +1,42 @@
 package ru.geekbrains.persist.model;
 
-import ru.geekbrains.service.ProductDTO;
-
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "title", unique = true, nullable = false)
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+    @Column(name = "price")
+    private BigDecimal price;
 
-    @Column(name = "price",nullable = false)
-    private double price;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne(optional = false)
     private Category category;
 
-    public Product(String title, String description, double price) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-    }
+    @ManyToOne(optional = false)
+    private Brand brand;
 
-    public Product(ProductDTO productDTO) {
-        this.id = productDTO.getId();
-        this.title = productDTO.getTitle();
-        this.description = productDTO.getDescription();
-        this.price = productDTO.getPrice();
-    }
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Picture> pictures;
 
     public Product() {
+    }
 
+    public Product(String name, BigDecimal price, Category category, Brand brand) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.brand = brand;
     }
 
     public Long getId() {
@@ -51,27 +47,43 @@ public class Product {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 }

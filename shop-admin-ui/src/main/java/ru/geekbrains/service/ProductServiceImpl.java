@@ -1,107 +1,87 @@
 package ru.geekbrains.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import ru.geekbrains.controllers.repr.ProductRepr;
+import ru.geekbrains.error.NotFoundException;
+import ru.geekbrains.persist.model.Picture;
 import ru.geekbrains.persist.model.Product;
 import ru.geekbrains.persist.repo.ProductRepository;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService, Serializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     private final ProductRepository productRepository;
 
+    private final PictureService pictureService;
+
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, PictureService pictureService) {
         this.productRepository = productRepository;
+        this.pictureService = pictureService;
     }
 
     @Override
-    public List<ProductDTO> findAll() {
-
-        return productRepository.findAll().stream()
-                .map(ProductDTO::new)
+    @Transactional
+    public List<ProductRepr> findAll() {
+        return productRepository.findAllWithPictureFetch().stream()
+                .map(ProductRepr::new)
                 .collect(Collectors.toList());
-
-/*
-        List<ProductDTO> list = new ArrayList<>();
-        for (Product product : productRepository.findAll()) {
-            ProductDTO productDTO = new ProductDTO(product);
-            list.add(productDTO);
-        }
-        return list;
-*/
     }
 
     @Override
-    public Page<ProductDTO> findWithFilter(String nameFilter, Double minPrice, Double maxPrice,
-                                           Integer page, Integer size, String sortBy) {
-
-        Specification<Product> specification = Specification.where(null);
-
-        if (nameFilter != null && !nameFilter.isBlank()) {
-            specification = specification.and(ProductSpecification.nameLike(nameFilter));
-        }
-
-        if (minPrice != null) {
-            specification = specification.and(ProductSpecification.minPrice(minPrice));
-        }
-
-        if (maxPrice != null) {
-            specification = specification.and(ProductSpecification.maxPrice(maxPrice));
-        }
-
-        return productRepository.findAll(specification, PageRequest.of(page, size,
-                Sort.Direction.ASC, sortBy))
-                .map(ProductDTO::new);
-
-//        return productRepository.findWithFilter(nameFilter, minPrice, maxPrice).stream()
-//                .map(ProductDTO::new)
-//                .collect(Collectors.toList());
-    }
-
-//    @Override
-//    public List<ProductDTO> findProductByNameLike(String nameFilter) {
-//        return productRepository.findProductByNameLike(nameFilter).stream()
-//                .map(ProductDTO::new)
-//                .collect(Collectors.toList());
-//    }
-//
-//    @Override
-//    public List<ProductDTO> findProductByPriceIn(double minPrice, double maxPrice) {
-//        return productRepository.findProductByPriceIn(minPrice, maxPrice).stream()
-//                .map(ProductDTO::new)
-//                .collect(Collectors.toList());
-//    }
-
-    //Методы могут включать несколько операций, поэтому @Транзакции нужны здесь
     @Transactional
-    @Override
-    public Optional<ProductDTO> findById(long id) {
-        return productRepository.findById(id)
-                .map(ProductDTO::new);
-
+    public Optional<ProductRepr> findById(Long id) {
+        return productRepository.findById(id).map(ProductRepr::new);
     }
 
-    @Transactional
     @Override
-    public void save(ProductDTO productDTO) {
-        Product product = new Product(productDTO);
-        productRepository.save(product);
-        if (productDTO.getId() == null) productDTO.setId(product.getId());
-    }
-
     @Transactional
-    @Override
-    public void delete(long id) {
+    public void deleteById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void save(ProductRepr productRepr) throws IOException {
+        Product product = (productRepr.getId() != null) ? productRepository.findById(productRepr.getId())
+                .orElseThrow(NotFoundException::new) : new Product();
+        product.setName(productRepr.getName());
+        product.setCategory(productRepr.getCategory());
+        product.setBrand(productRepr.getBrand());
+        product.setPrice(productRepr.getPrice());
+
+        if (productRepr.getNewPictures() != null) {
+            for (MultipartFile newPicture : productRepr.getNewPictures()) {
+                logger.info("Product {} file {} size {} contentType {}", productRepr.getId(),
+                        newPicture.getOriginalFilename(), newPicture.getSize(), newPicture.getContentType());
+
+                if (product.getPictures() == null) {
+                    product.setPictures(new ArrayList<>());
+                }
+
+                product.getPictures().add(new Picture(
+                        newPicture.getOriginalFilename(),
+                        newPicture.getContentType(),
+                        pictureService.createPictureData(newPicture.getBytes()),
+                        product
+                ));
+            }
+        }
+
+        productRepository.save(product);
     }
 }

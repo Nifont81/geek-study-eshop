@@ -1,12 +1,10 @@
 package ru.geekbrains.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.geekbrains.controllers.repr.UserRepr;
 import ru.geekbrains.persist.model.User;
 import ru.geekbrains.persist.repo.UserRepository;
 
@@ -15,17 +13,26 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-//    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public void save(UserRepr userRepr) {
+        User user = new User();
+        user.setId(userRepr.getId());
+        user.setLogin(userRepr.getLogin());
+        user.setPassword(passwordEncoder.encode(userRepr.getPassword()));
+        user.setRoles(userRepr.getRoles());
+        userRepository.save(user);
     }
 
     @Override
@@ -36,47 +43,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserRepr> findWithFilter(String usernameFilter, Integer minAge, Integer maxAge,
-                                         Integer page, Integer size, String sortField) {
-        Specification<User> spec = Specification.where(null);
-        if (usernameFilter != null && !usernameFilter.isBlank()) {
-            spec = spec.and(UserSpecification.usernameLike(usernameFilter));
-        }
-        if (minAge != null) {
-            spec = spec.and(UserSpecification.minAge(minAge));
-        }
-        if (maxAge != null) {
-            spec = spec.and(UserSpecification.maxAge(maxAge));
-        }
-        if (sortField != null && !sortField.isBlank()) {
-            return userRepository.findAll(spec, PageRequest.of(page, size, Sort.by(sortField)))
-                    .map(UserRepr::new);
-        }
-        return userRepository.findAll(spec, PageRequest.of(page, size))
-                .map(UserRepr::new);
+    public Optional<UserRepr> findById(Long id) {
+        return userRepository.findById(id).map(UserRepr::new);
     }
 
-    @Transactional
     @Override
-    public Optional<UserRepr> findById(long id) {
-       return userRepository.findById(id)
-                .map(UserRepr::new);
-    }
-
-    @Transactional
-    @Override
-    public void save(UserRepr user) {
-        User userToSave = new User(user);
-//        userToSave.setPassword(passwordEncoder.encode(userToSave.getPassword()));
-        userRepository.save(userToSave);
-        if (user.getId() == null) {
-            user.setId(userToSave.getId());
-        }
-    }
-
-    @Transactional
-    @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         userRepository.deleteById(id);
     }
 }

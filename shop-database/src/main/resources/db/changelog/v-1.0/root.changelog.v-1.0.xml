@@ -4,9 +4,9 @@
                    xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
-    <include file="db.changelog-20210330-164837073.xml" relativeToChangelogFile="true"/>
+    <include file="db.changelog-20210324-195142874.xml" relativeToChangelogFile="true"/>
 
-    <changeSet id="1617122920584-7" author="nifontbus">
+    <changeSet id="1616615526740-7" author="aleks_ush">
         <sqlFile dbms="mysql"
                  endDelimiter="\nGO"
                  relativeToChangelogFile="true"
@@ -15,4 +15,5 @@
                  path="insert-default-users-roles.sql"/>
         <rollback/>
     </changeSet>
+
 </databaseChangeLog>
