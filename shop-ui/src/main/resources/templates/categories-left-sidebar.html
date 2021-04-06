@@ -39,14 +39,18 @@
                             <div class="first_fillter">
                                 <h4>Showing 1 to 12 of 30 total</h4>
                             </div>
+
                             <div class="secand_fillter">
                                 <h4>SORT BY :</h4>
                                 <select class="selectpicker">
-                                    <option>Name</option>
+                                    <option>Name
+                                        <a th:href="@{/(sort='name')}"/>
+                                    </option>
                                     <option>Name 2</option>
                                     <option>Name 3</option>
                                 </select>
                             </div>
+
                             <div class="third_fillter">
                                 <h4>Show : </h4>
                                 <select class="selectpicker">
@@ -62,185 +66,93 @@
                             </div>
                         </div>
                     </div>
-                    <!--Фильтры товаров-->
-
+                    <!--End Фильтры товаров-->
 
                     <div class="categories_product_area">
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-1.jpg" alt="">
-                                        <h5 class="new">New</h5>
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>Travel Bags</h4>
-                                        <h5>
-                                            <del>$45.50</del>
-                                            $40
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-2.jpg" alt="">
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>Summer Dress</h4>
-                                        <h5>$45.50</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-3.jpg" alt="">
-                                        <h5 class="new">New</h5>
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>Nike Shoes</h4>
-                                        <h5>
-                                            <del>$130</del>
-                                            $110
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-4.jpg" alt="">
-                                        <h5 class="new">New</h5>
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>High Heel</h4>
-                                        <h5>
-                                            <del>$130.50</del>
-                                            $110
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-5.jpg" alt="">
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>Fossil Watch</h4>
-                                        <h5>$250.50</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-6.jpg" alt="">
-                                        <h5 class="new">New</h5>
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>Ricky Shirt</h4>
-                                        <h5>$45.05</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-7.jpg" alt="">
-                                        <h5 class="new">New</h5>
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>Nike Max Air Vapor Power</h4>
-                                        <h5>$45.05</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-8.jpg" alt="">
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
-                                        <h4>Nike Shoes</h4>
-                                        <h5>$45.05</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="l_product_item">
-                                    <div class="l_p_img">
-                                        <img src="img/product/c-product-9.jpg" alt="">
-                                        <h5 class="sale">Sale</h5>
-                                    </div>
-                                    <div class="l_p_text">
-                                        <ul>
-                                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                            <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
-                                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                        </ul>
 
-                                        <h4>Summer Dress</h4>
-                                        <h5>$110</h5>
+                        <div class="row">
+
+                            <div th:if="${products.hasContent()}" th:each="prod : ${products.content}"
+                                 class="col-lg-4 col-sm-6">
+                                <div class="l_product_item">
+
+                                    <div class="l_p_img">
+                                        <img th:src="@{picture/{pictureId}(pictureId=${prod.pictures.get(0).id})}"
+                                             alt=""/>
+
+                                        <div class="text-center">
+                                            <ul>
+                                                <li><a class="add_btn" th:href="@{/{id} (id = ${prod.id})}">
+                                                    Детали...
+                                                </a></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="l_p_text">
+                                        <ul>
+                                            <li><a class="add_cart_btn" href="#">Добавить в корзину</a></li>
+                                        </ul>
+                                        <h4 th:text=${prod.name}>name
+                                            <h5 th:text=${prod.price}>price
+                                            </h5>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
+
+                            <!--   Образец             <div class="col-lg-4 col-sm-6">
+                                                           <div class="l_product_item">
+                                                               <div class="l_p_img">
+                                                                   <img src="img/product/c-product-3.jpg" alt="">
+                                                                   <h5 class="new">New</h5>
+                                                               </div>
+                                                               <div class="l_p_text">
+                                                                   <ul>
+                                                                       <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
+                                                                       <li><a class="add_cart_btn" href="#">Add To Cart</a></li>
+                                                                       <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
+                                                                   </ul>
+                                                                   <h4>Nike Shoes</h4>
+                                                                   <h5>
+                                                                       <del>$130</del>
+                                                                       $110
+                                                                   </h5>
+                                                               </div>
+                                                           </div>
+                                                       </div>-->
+
                         </div>
 
                         <!--================Пагинация===================-->
                         <nav aria-label="Page navigation example" class="pagination_area">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                <li class="page-item next"><a class="page-link" href="#"><i class="fa fa-angle-right"
-                                                                                            aria-hidden="true"></i></a>
+
+                                <li class="page-item prev" th:classappend="${products.number<1} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/(page=${products.number})}">
+                                        <i class="fa fa-angle-left" aria-hidden="false"></i>
+                                    </a>
                                 </li>
+
+                                <li th:each="num: ${#numbers.sequence(1, products.totalPages)}"
+                                    th:classappend="${num == products.number + 1} ? 'active'"
+                                    class="page-item">
+                                    <a th:text="${num}" class="page-link"
+                                       th:href="@{/(page=${num})}"
+                                       th:classappend="${num == products.number + 1} ? 'disabled'">text
+                                    </a>
+                                </li>
+
+                                <li class="page-item next"
+                                    th:classappend="${products.number>=products.getTotalPages()-1} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/(page=${products.number}+2)}">
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+
                             </ul>
                         </nav>
                         <!--================Пагинация===================-->
@@ -249,74 +161,41 @@
                 </div>
 
 
-
                 <div class="col-lg-3 float-md-right">
                     <div class="categories_sidebar">
 
                         <!--==========Категории товаров==========-->
                         <aside class="l_widgest l_p_categories_widget">
                             <div class="l_w_title">
-                                <h3>Categories</h3>
+                                <h3>Категории</h3>
                             </div>
+
                             <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Men’s Fashion
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
+
+                                <li th:each="cat : ${categories}" class="nav-item">
+                                    <a th:text="${cat.name}"
+                                       th:href="@{/(categoryId=${cat.id})}"
+                                       class="nav-link">Category
                                     </a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Women’s Fashion
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li class="nav-item"><a class="nav-link" href="#">Hoodies & Sweatshirts</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Jackets & Coats</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Blouses & Shirts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Phone & Accessories
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Electronic Appliance
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" href="#">Computer & Networking
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" href="#">TV, Audiio & Gaming
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" href="#">Office Supplies
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" href="#">All Categories
-                                        <i class="icon_plus" aria-hidden="true"></i>
-                                        <i class="icon_minus-06" aria-hidden="true"></i>
-                                    </a>
-                                </li>
+
+                                <!--                               <li class="nav-item dropdown">
+                                                                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                       Women’s Fashion
+                                                                       <i class="icon_plus" aria-hidden="true"></i>
+                                                                       <i class="icon_minus-06" aria-hidden="true"></i>
+                                                                   </a>
+                                                                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                                       <li class="nav-item"><a class="nav-link" href="#">Hoodies & Sweatshirts</a></li>
+                                                                       <li class="nav-item"><a class="nav-link" href="#">Jackets & Coats</a></li>
+                                                                       <li class="nav-item"><a class="nav-link" href="#">Blouses & Shirts</a></li>
+                                                                   </ul>
+                                                               </li>-->
+
                             </ul>
                         </aside>
-                        <!--==========Категории товаров==========-->
+                        <!--==========End Категории товаров==========-->
 
 
                         <!--==========Фильтр цен==========-->
@@ -332,14 +211,15 @@
                         <!--==========Брэнды товаров==========-->
                         <aside class="l_widgest l_menufacture_widget">
                             <div class="l_w_title">
-                                <h3>Manufacturer</h3>
+                                <h3>Брэнды</h3>
                             </div>
                             <ul>
-                                <li><a href="#">Nigel Cabourn.</a></li>
-                                <li><a href="#">Cacharel.</a></li>
-                                <li><a href="#">Calibre (Menswear)</a></li>
-                                <li><a href="#">Calvin Klein.</a></li>
-                                <li><a href="#">Camilla and Marc</a></li>
+                                <li th:each="brand : ${brands}">
+                                    <a th:text="${brand.name}"
+                                       th:href="@{/(brandId=${brand.id})}">brand
+                                    </a>
+                                </li>
+
                             </ul>
                         </aside>
                         <!--==========Брэнды товаров==========-->
@@ -347,26 +227,36 @@
                         <!--==========Новые прподукты==========-->
                         <aside class="l_widgest l_feature_widget">
                             <div class="l_w_title">
-                                <h3>Featured Products</h3>
+                                <h3>Избранные товары</h3>
                             </div>
+
                             <div class="media">
-                                <div class="d-flex">
-                                    <img src="img/product/featured-product/f-p-5.jpg" alt="">
+                                <div th:with="prod = ${products.content.get(0)}">
+
+                                    <div class="d-flex">
+                                        <img th:src="@{picture/{pictureId}(pictureId=${prod.pictures.get(0).id})}"
+                                             class="card-img" alt="">
+                                    </div>
+
+                                    <div class="media-body">
+                                        <h4 th:text="${prod.name}">Название</h4>
+                                        <h5 th:text="${prod.price} + 'Р.'">Цена</h5>
+                                    </div>
+
                                 </div>
-                                <div class="media-body">
-                                    <h4>Jeans with <br/> Frayed Hems</h4>
-                                    <h5>$45.05</h5>
-                                </div>
+
                             </div>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="img/product/featured-product/f-p-6.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <h4>Crysp Denim<br/>Montana</h4>
-                                    <h5>$45.05</h5>
-                                </div>
-                            </div>
+
+                            <!--                            <div class="media">
+                                                            <div class="d-flex">
+                                                                <img src="img/product/featured-product/f-p-6.jpg" alt="">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h4>Crysp Denim<br/>Montana</h4>
+                                                                <h5>$45.05</h5>
+                                                            </div>
+                                                        </div>-->
+
                         </aside>
                         <!--==========Новые прподукты==========-->
 
