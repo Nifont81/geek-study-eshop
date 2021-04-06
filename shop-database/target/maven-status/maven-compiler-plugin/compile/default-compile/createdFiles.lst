@@ -1,0 +1,14 @@
+ru\geekbrains\persist\repo\CategoryRepository.class
+ru\geekbrains\Utils.class
+ru\geekbrains\persist\model\User.class
+ru\geekbrains\persist\model\Category.class
+ru\geekbrains\persist\model\Brand.class
+ru\geekbrains\persist\model\PictureData.class
+ru\geekbrains\persist\repo\ProductRepository.class
+ru\geekbrains\persist\repo\RoleRepository.class
+ru\geekbrains\persist\model\Product.class
+ru\geekbrains\persist\repo\UserRepository.class
+ru\geekbrains\persist\model\Picture.class
+ru\geekbrains\persist\repo\BrandRepository.class
+ru\geekbrains\persist\repo\PictureRepository.class
+ru\geekbrains\persist\model\Role.class
