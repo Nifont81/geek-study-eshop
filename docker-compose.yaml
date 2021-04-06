@@ -7,8 +7,8 @@ services:
     ports:
       - "80:80"
 
-  shop-ui:
-    image: ghcr.io/nifontpro/shop-ui:latest
+  shop-admin-ui:
+    image: ghcr.io/nifontpro/shop-admin-ui:latest
     restart: always
     ports:
       - "8080"
@@ -16,8 +16,8 @@ services:
       MYSQL_HOSTNAME: "db"
     command: bash -c "/apps/wait-for-mysql.sh db && /apps/entrypoint.sh"
 
-  shop-admin-ui:
-    image: ghcr.io/nifontpro/shop-admin-ui:latest
+  shop-ui:
+    image: ghcr.io/nifontpro/shop-ui:latest
     restart: always
     ports:
       - "8080"
